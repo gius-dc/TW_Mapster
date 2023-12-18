@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My itineraries (offline) | Mapster</title>
+  
+  <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/static/css/base.css">
+  <link rel="stylesheet" href="/static/css/myitineraries.css">
+  <link rel="icon" href="/static/icons/transp-icon-256x256.png" type="image/png">
+  <link rel="manifest" href="/static/manifest.json">
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid my-custom-container">
+      <a class="navbar-brand" href="/">Mapster</a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+              data-bs-toggle="dropdown" aria-expanded="false">
+              Theme
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
+              <li>
+                <div class="dropdown-item">
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="themeToggle" disabled>
+                    <label class="form-check-label" for="themeToggle">Dark mode</label>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="dropdown-item">
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="systemThemeCheck">
+                    <label class="form-check-label" for="systemThemeCheck">Follow system
+                      theme</label>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/static/html/myitineraries_offline.html">My itineraries (offline)</a>
+        </li>
+      </div>
+  </nav>
+
+  <div class="container mt-4">
+    <h2 class="text-center mb-4">My Itineraries (offline)</h2>
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <p class="mb-0">View your synced personal itineraries stored locally.</p>
+    </div>
+    <div class="row" id="itinerary-container">
+      
+    </div>
+  </div>
+
+  <script src="/static/js/bootstrap.bundle.min.js"></script>
+  <script src="/static/js/base.js"></script>
+  <script src="/static/js/dexie.min.js"></script>
+  <script src="/static/js/myitineraries_offline.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,49 @@
+{
+    "short_name": "Mapster",
+    "name": "Mapster - Map-Sharing Platform",
+    "icons": [
+      {
+        "src": "/static/icons/icon-192x192.png",
+        "sizes": "192x192",
+        "type": "image/png",
+        "purpose": "any maskable"
+      },
+      {
+        "src": "/static/icons/icon-256x256.png",
+        "sizes": "256x256",
+        "type": "image/png",
+        "purpose": "any maskable"
+      },
+      {
+        "src": "/static/icons/icon-384x384.png",
+        "sizes": "384x384",
+        "type": "image/png",
+        "purpose": "any maskable"
+      },
+      {
+        "src": "/static/icons/icon-512x512.png",
+        "sizes": "512x512",
+        "type": "image/png",
+        "purpose": "any maskable"
+      }
+    ],
+    "start_url": "/",
+    "background_color": "#FFFFFF",
+    "display": "standalone",
+    "scope": "/",
+    "theme_color": "#000000",
+    "description": "Mapster is an interactive map-sharing platform that allows users to create their personalized itineraries with points of interest and routes. Save and share your best routes with the community for an ever-improving user experience!",
+    "categories": [
+      "productivity",
+      "navigation",
+      "social"
+    ],
+    "screenshots": [
+      {
+        "src": "/static/icons/icon-512x512.png",
+        "type": "image/png",
+        "sizes": "512x512"
+      }
+    ]
+  }
+  

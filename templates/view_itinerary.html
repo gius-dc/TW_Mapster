@@ -1,0 +1,171 @@
+{% extends "base.html" %}
+
+{% block title %}{{ itinerary_name }} | Mapster{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="/static/css/view_itinerary.css">
+<link rel="stylesheet" href="/static/css/leaflet.css">
+<link rel="stylesheet" href="/static/css/leaflet-gesture-handling.min.css" type="text/css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+{% endblock %}
+
+{% block content %}
+<div class="container mt-3">
+    
+    <div class="d-flex align-items-center mb-4" style="justify-content: space-between;">
+        
+<div class="d-none d-sm-flex">
+    <a class="btn btn-success" onclick="startNavigation('driving')" style="margin-right: 10px;">
+        <img src="/static/icons/car-icon.svg" alt="Navigate by Car" class="icon" />
+    </a>
+    <a class="btn btn-success" onclick="startNavigation('walking')" style="margin-right: 10px;">
+        <img src="/static/icons/walking-icon.svg" alt="Navigate on Foot" class="icon" />
+    </a>
+    <a class="btn btn-success" onclick="startNavigation('bicycling')">
+        <img src="/static/icons/biking-icon.svg" alt="Navigate by Bicycle" class="icon" />
+    </a>
+</div>
+
+
+    <div class="d-flex d-sm-none">
+        <button class="btn btn-success dropdown-toggle" type="button" id="dropdownNavigationButton"
+                data-bs-toggle="dropdown" aria-expanded="false">
+            <img src="/static/icons/navigate-icon.svg" alt="Navigation" class="icon" />
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownNavigationButton">
+            <li>
+                <a class="dropdown-item d-flex align-items-center" onclick="startNavigation('driving')">
+                    <img src="/static/icons/car-icon.svg" alt="Navigate by Car" class="icon pe-2" />
+                    Navigate by Car
+                </a>
+            </li>
+            <li>
+                <a class="dropdown-item d-flex align-items-center" onclick="startNavigation('walking')">
+                    <img src="/static/icons/walking-icon.svg" alt="Navigate on Foot" class="icon pe-2" />
+                    Navigate on Foot
+                </a>
+            </li>
+            <li>
+                <a class="dropdown-item d-flex align-items-center" onclick="startNavigation('bicycling')">
+                    <img src="/static/icons/biking-icon.svg" alt="Navigate by Bicycle" class="icon pe-2" />
+                    Navigate by Bicycle
+                </a>
+            </li>
+        </ul>
+    </div>
+
+
+        <div class="d-flex flex-wrap align-items-center">
+            
+            <div class="d-none d-lg-block" style="margin-right: 10px;">
+                <img src="/static/icons/user-icon.svg" alt="Author" class="icon-medium" />
+                <span>{{ author }}</span>
+            </div>
+            <div class="d-none d-lg-block" style="margin-right: 10px;">
+                <img src="/static/icons/calendar-icon.svg" alt="Date" class="icon-medium" />
+                <span>{{ creation_date }}</span>
+            </div>
+
+            
+            <div class="d-lg-none dropdown" style="margin-right: 10px;">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="authorDropdown"
+                    data-bs-toggle="dropdown" aria-expanded="false">
+                    <img src="/static/icons/user-icon.svg" alt="Author" class="icon" />
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="authorDropdown">
+                    <li><a class="dropdown-item">{{ author }}</a></li>
+                </ul>
+            </div>
+            <div class="d-lg-none dropdown" style="margin-right: 10px;">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dateDropdown"
+                    data-bs-toggle="dropdown" aria-expanded="false">
+                    <img src="/static/icons/calendar-icon.svg" alt="Date" class="icon" />
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dateDropdown">
+                    <li><a class="dropdown-item">{{ creation_date }}</a></li>
+                </ul>
+            </div>
+
+
+            {% if not is_author %}
+            <button id="likeButton" style="margin-right: 10px;" class="btn btn-primary d-flex align-items-center"
+                onclick="toggleLike('{{ itinerary['_id']['$oid'] }}')">
+                {% if has_liked %}
+                <img id="like-img" src="/static/icons/unlike-icon.svg" alt="Unlike"
+                    style="height: 20px; margin-right: 5px;">
+                {% else %}
+                <img id="like-img" src="/static/icons/likes-icon.svg" alt="Like"
+                    style="height: 20px; margin-right: 5px;">
+                {% endif %}
+                <span id="likesCount">{{ num_likes }}</span>
+            </button>
+            {% else %}
+            <div class="d-flex align-items-center">
+                <img src="/static/icons/likes-icon.svg" class="icon-medium" alt="Likes" style="height: 20px; margin-right: 5px;">
+                <span id="likesCount" style="margin-right: 10px;">{{ num_likes }}</span>
+            </div>
+            {% endif %}
+
+            <div class="d-flex align-items-center mr-2">
+                <img src="/static/icons/views-icon.svg" class="icon-medium" style="margin-right: 5px;" />
+                <span style="margin-right: 10px;">{{ num_views }}</span>
+            </div>
+
+        </div>
+
+
+
+
+    </div>
+
+
+    <div class="row">
+        
+        <div class="col-lg-8">
+            <div id="map" class="map-container"></div> 
+        </div>
+
+        
+        <div class="col-lg-4">
+            <div class="card mb-3">
+                <div class="card-body">
+                    
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h2>{{ itinerary_name }}</h2>
+                    </div>
+                    
+                    <div style="margin-top: 20px;">
+                        {% if description %}
+                        <p>{{ description }}</p>
+                        {% else %}
+                        <i>No description provided</i>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+            <div id="sidebar">
+                <div class="sidebar-header">
+                    <h2>Stops</h2>
+                    <div id="loadingIndicator" class="hidden">Loading...</div>
+                </div>
+                <div id="waypointsList">
+                    <ul></ul>
+                    <div id="hidden-waypoints" style="display: none;"></div>
+                    <input type="hidden" id="waypoint_order" name="waypoint_order">
+                    <input type="hidden" id="waypoint_count" name="waypoint_count" value="0">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    var itineraryData = {{ itinerary| tojson }};
+    var hasLiked = {{ has_liked| lower }};  // Converte il valore booleano in stringa ("true" o "false")
+    var isAuthor = {{ is_author| lower }};  // Converte il valore booleano in stringa ("true" o "false")
+</script>
+<script src="/static/js/leaflet.js"></script>
+<script src="/static/js/leaflet-gesture-handling.js"></script>
+<script src="/static/js/view_itinerary.js"></script>
+{% endblock %}

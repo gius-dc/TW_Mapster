@@ -1,0 +1,44 @@
+
+.navbar-dark-custom {
+    background-color: #343a40 !important;
+    color: #fff !important;
+}
+
+.navbar-dark-custom .navbar-brand {
+    color: #fff !important;
+}
+
+.navbar-dark-custom .nav-link {
+    color: #fff !important;
+}
+
+.dropdown-menu-dark {
+    background-color: #343a40 !important;
+    color: #fff !important;
+}
+
+.dropdown-menu-dark .dropdown-item {
+    color: #fff !important;
+}
+
+.dropdown-menu-dark .dropdown-item:hover,
+.dropdown-menu-dark .dropdown-item:focus {
+    background-color: #23272b !important;
+}
+
+.navbar-toggler-dark .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255, 255, 255, 0.5)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
+
+.icon-dark-mode {
+    filter: invert(1);
+}
+
+#offline-icon {
+    max-width: 128px;
+    max-height: 256px;
+}
+
+body:not(.bg-dark) #offline-icon {
+    filter: invert(1);
+}

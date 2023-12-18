@@ -1,0 +1,8 @@
+flask
+flask-pymongo
+flask_login
+flask_oauthlib
+Werkzeug==2.3.8
+bcrypt
+pytz
+humanize

@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block title %}My Itineraries | Mapster{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="/static/css/myitineraries.css">
+{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="text-center mb-4">My Itineraries</h2>
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <p class="mb-0">Here you can view and manage the itineraries you have created.</p>
+        <a href="{{ url_for('create_itinerary') }}" class="btn btn-primary">
+            <img src="/static/icons/add-icon.svg" alt="Create" class="icon">
+        </a>
+    </div>
+    {% if itineraries|length > 0 %}
+    <div class="row">
+        {% for itinerary in itineraries %}
+        
+        <div class="col-md-6 mb-4">
+                <div class="card h-100" onclick="window.location.href='{{ url_for('view_itinerary', itinerary_id=itinerary._id) }}';" style="cursor: pointer; background-image: url('data:image/{{ itinerary.image_format }};base64,{{ itinerary.image_b64 }}');">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                            <h5 class="card-title mb-0">{{ itinerary.name }}</h5>
+                            <span class="date-created">{{ itinerary.date_created }}</span>
+                        </div>
+                        <p class="card-text">
+                            
+                            {% if itinerary.description %}
+                            {{ itinerary.description }}
+                            {% else %}
+                            <i>No description provided</i>
+                            {% endif %}
+                        </p>
+                    </div>
+                    <div class="card-footer" onclick="event.stopPropagation();">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="itinerary-info">
+                                <img src="/static/icons/views-icon.svg" alt="Views" class="icon-medium mr-1">
+                                <span class="views">{{ itinerary.views }}</span>
+                                <img src="/static/icons/likes-icon.svg" alt="Likes" class="icon-medium mr-1">
+                                <span class="likes">{{ itinerary.likes }}</span>
+                            </div>
+                            <div class="card-actions">
+                                
+                                <button class="btn btn-danger btn-delete" data-itinerary-id="{{ itinerary._id }}">
+                                    <img src="/static/icons/bin-icon.svg" alt="Delete" class="icon">
+                                </button>
+                                <button class="btn btn-primary btn-edit" data-itinerary-id="{{ itinerary._id }}">
+                                    <img src="/static/icons/edit-icon.svg" alt="Edit" class="icon">
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="d-flex justify-content-center align-items-center" style="height: 200px; color: #616161;">
+        <p>No itineraries yet...</p>
+    </div>
+    {% endif %}
+</div>
+
+<script src="/static/js/myitineraries.js"></script>
+{% endblock %}

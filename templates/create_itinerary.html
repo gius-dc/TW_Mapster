@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+
+{% block title %}{{ 'Edit' if edit_mode else 'Create' }} itinerary | Mapster{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="/static/css/create_itinerary.css">
+<link rel="stylesheet" href="/static/css/leaflet.css">
+<link rel="stylesheet" href="/static/css/leaflet-gesture-handling.min.css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+{% endblock %}
+
+{% block content %}
+<div id="loadingOverlay" class="overlay hidden">
+    <div class="overlay-content">
+        <svg class="spinner" width="65px" height="65px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+            <circle class="path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle>
+        </svg>
+        <p id="message" style="margin-top: 20px;">Loading...</p>
+    </div>
+</div>
+
+<div id="resultOverlay" class="overlay hidden">
+    <div class="overlay-content">
+        <p id="resultMessage"></p>
+    </div>
+</div>
+
+<div class="container mt-3">
+    <h2 class="text-center mb-4">{{ 'Edit' if edit_mode else 'Create' }} itinerary</h2>
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <p class="mb-0">Select stops by clicking on the map, give the itinerary a name and, optionally, a description.</p>
+        <a class="btn btn-primary" onclick="sendItinerary()">
+            <img src="/static/icons/send-icon.svg" alt="{{ 'Update' if edit_mode else 'Submit' }}" class="icon"/>
+        </a>
+    </div>
+    <div class="row">
+        <div class="col-md-8">
+            <div id="map" class="map-container"></div>
+        </div>
+        <div class="col-md-4">
+            <div class="card mb-3">
+                <div class="card-body">
+                    <form id="itineraryForm">
+                        <input type="hidden" id="itinerary_id" name="itinerary_id" value="{{ itinerary['_id']['$oid'] if itinerary else '' }}">
+                        <div class="form-group mb-2">
+                            <input type="text" id="itinerary_name" name="itinerary_name" class="form-control"
+                                placeholder="Itinerary name" value="{{ itinerary['name'] if itinerary else '' }}" required>
+                        </div>
+                        <div class="form-group mb-3">
+                            <textarea id="itinerary_description" name="itinerary_description" class="form-control"
+                                rows="3" placeholder="Itinerary description">{{ itinerary['description'] if itinerary else '' }}</textarea>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div id="sidebar">
+                <div class="sidebar-header">
+                    <h2>Stops</h2>
+                </div>
+                <div id="waypointsList" class="empty">
+                    <p id="noStopsMessage" class="text-center">No stops yet...</p>
+                    <ul></ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/static/js/leaflet.js"></script>
+<script src="/static/js/leaflet-gesture-handling.js"></script>
+<script src="/static/js/Sortable.min.js"></script>
+<script src="/static/js/html2canvas.min.js"></script>
+<script type="text/javascript">
+    var itineraryData = {{ itinerary|tojson|safe }};
+</script>
+<script src="/static/js/create_itinerary.js"></script>
+{% endblock %}

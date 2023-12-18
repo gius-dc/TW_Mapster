@@ -1,0 +1,123 @@
+
+.card {
+    margin-bottom: 1rem;
+}
+
+.form-control {
+    background-color: #ffffff;
+    color: #495057;
+    border-color: #ced4da;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: 0.25rem;
+    margin-bottom: 1rem;
+}
+
+.form-control:focus {
+    border-color: #80bdff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, .25);
+}
+
+.is-invalid {
+    border-color: #dc3545;
+    box-shadow: 0 0 5px red;
+}
+
+.invalid-feedback {
+    display: block;
+    color: #dc3545;
+    font-size: 0.875rem;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: 0.25rem;
+    display: inline-block;
+}
+
+.btn-primary:hover {
+    background-color: #0069d9;
+    border-color: #0062cc;
+}
+
+.bg-dark .card {
+    background-color: #343a40 !important;
+    color: #dcdcdc;
+    border: 1px solid #495057;
+}
+
+.bg-dark .form-control {
+    background-color: #212529 !important;
+    color: #fff !important;
+    border-color: #6c757d;
+}
+
+.bg-dark .form-control:focus {
+    border-color: #80bdff !important;
+    box-shadow: 0 0 0 0.2rem rgba(128, 189, 255, .25) !important;
+}
+
+.bg-dark .is-invalid {
+    border-color: #dc3545 !important;
+    box-shadow: 0 0 5px red !important;
+}
+
+.bg-dark .invalid-feedback {
+    display: block;
+    color: #dc3545;
+    font-size: 0.875rem;
+}
+
+.bg-dark .btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.bg-dark .btn-primary:hover {
+    background-color: #0069d9;
+    border-color: #0062cc;
+}
+
+.bg-light .card {
+    background-color: #fff !important;
+    color: #000 !important;
+    border-color: #ced4da;
+}
+
+.bg-light .form-control {
+    background-color: #f8f9fa !important;
+    color: #495057 !important;
+    border-color: #ced4da;
+}
+
+.bg-light .form-control:focus {
+    border-color: #007bff !important;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, .25) !important;
+}
+
+.bg-light .is-invalid {
+    border-color: #dc3545 !important;
+    box-shadow: 0 0 5px red !important;
+}
+
+.bg-light .invalid-feedback {
+    display: block;
+    color: #dc3545;
+    font-size: 0.875rem;
+}
+
+.bg-light .btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.bg-light .btn-primary:hover {
+    background-color: #0069d9;
+    border-color: #0062cc;
+}
+

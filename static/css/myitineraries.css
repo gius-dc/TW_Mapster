@@ -1,0 +1,139 @@
+.icon,
+.icon-medium {
+    max-width: 24px;
+    max-height: 24px;
+    vertical-align: middle;
+}
+
+body:not(.bg-dark) .card {
+    background-color: #f0f0f0;
+    color: #343a40;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ccc;
+}
+
+body.bg-dark .card,
+body.bg-dark .card:first-child {
+    background-color: #4a4e53;
+    color: #f8f9fa;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ccc;
+}
+
+.itinerary-info {
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+}
+
+.itinerary-info img {}
+
+.itinerary-info span {
+    margin-right: 15px;
+}
+
+.card-actions {
+    display: flex;
+    align-items: center;
+}
+
+.card-description {
+    margin-top: 10px;
+    font-size: 0.9rem;
+}
+
+.btn-delete {
+    margin-right: 10px;
+}
+
+.card-title {
+    flex-grow: 1;
+    margin-bottom: 0;
+}
+
+.date-created {
+    flex-shrink: 0;
+}
+
+body:not(.bg-dark) .icon-medium {
+    filter: invert(1);
+}
+
+.card-body {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    max-height: 200px;
+    height: 128px;
+}
+
+.card {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+body.bg-dark .card::before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+}
+
+body:not(.bg-dark) .card::before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(255, 255, 255, 0.5);
+    z-index: 1;
+}
+
+.card-body * {
+    position: relative;
+    z-index: 2;
+}
+
+.itinerary-info,
+.card-actions {
+    margin-top: auto;
+}
+
+.btn-edit,
+.btn-delete,
+.icon-medium,
+.likes,
+.views {
+    position: relative;
+    z-index: 2;
+}
+
+.card-text,
+.card-description {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-height: 4.5em;
+    z-index: 1;
+}
+
+.card-text-offline {
+    color: white;
+    z-index: 1;
+}
+
+body:not(.bg-dark) .card-text-offline {
+    color: black;
+    z-index: 1;
+}

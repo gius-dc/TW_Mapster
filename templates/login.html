@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block title %}Login | Mapster{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" href="/static/css/login.css">
+{% endblock %}
+
+{% block content %}
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <h2 class="text-center mb-4">Login to Mapster</h2>
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        {% for category, message in messages %}
+                            <div class="alert alert-{{ category }} mt-4">
+                                {{ message }}
+                                {% if message == 'Username does not exist.' %}
+                                    Don't have an account? <a href="{{ url_for('signup') }}">Sign up here</a>
+                                {% endif %}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+
+                <div class="card">
+                    <div class="card-body">
+                        <form action="/login" method="post" class="mb-3" id="login-form" novalidate>
+                            <div class="form-group">
+                                <label for="username">Username:</label>
+                                <input type="text" class="form-control" id="username" name="username" required>
+                                <div class="invalid-feedback">Username is required</div>
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Password:</label>
+                                <input type="password" class="form-control" id="password" name="password" required>
+                                <div class="invalid-feedback">Password is required</div>
+                            </div>
+                            <div class="form-group form-check">
+                                <input type="checkbox" class="form-check-input" id="remember" name="remember">
+                                <label class="form-check-label" for="remember">Remember me</label>
+                            </div>
+                            <button type="submit" class="btn btn-primary mb-3">Login</button>
+                            <a href="{{ url_for('google_login') }}" class="btn btn-google">
+                                <img src="/static/icons/google-logo.png" alt="Google logo" class="google-icon">Login with Google
+                            </a>                         
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="/static/js/login.js"></script>
+{% endblock %}
